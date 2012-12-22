@@ -1,4 +1,6 @@
 UserSearch::Application.routes.draw do
+  get "site_pages/home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
