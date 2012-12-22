@@ -12,6 +12,14 @@
 <div class="row">
     <div class="span2"><%= task.id %></div>
     <div class="span2"><%= task.title %></div>
-    <div class="span8"><%= task.description %></div>
+    <div class="span8">
+    	<% if task.description.empty? %>
+			<%= "N/A" %>
+		<% else %>
+			<%= task.description %>
+		<% end %>
+    </div>
 </div>
 <% end -%>
+
+<%= link_to "Create Task", new_task_path, class: "btn btn-large btn-primary" %>
