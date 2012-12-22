@@ -1,5 +1,16 @@
 UserSearch::Application.routes.draw do
-  get "site_pages/home"
+
+  #get "site_pages/home"
+  #match '/home', to: 'site_pages#home'
+  root to: 'site_pages#home'
+
+  resources :tasks
+
+  #match '/add_note',  to: 'tasks#new'
+
+  #match '/help',    to: 'static_pages#help'
+  #match '/about',   to: 'static_pages#about'
+  #match '/contact', to: 'static_pages#contact'  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
