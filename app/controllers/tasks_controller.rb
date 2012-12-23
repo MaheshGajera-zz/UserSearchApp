@@ -12,12 +12,14 @@ class TasksController < ApplicationController
   	end
     
   	def create
-	    @task = Task.new(params[:task])
-	    if @task.save
+      @task = Task.new(params[:task])
+	    
+      if @task.save
 	    	flash[:success] = "Task created."
 	      	redirect_to @task
 	    else
 	      render 'new'
 	    end
   	end
+
 end

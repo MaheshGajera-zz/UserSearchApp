@@ -1,4 +1,4 @@
-<% provide(:title, 'Create Task') %>
+<% provide(:title, 'New Task') %>
 <h1>Create a New Task</h1>
 
 <div class="row">
@@ -9,11 +9,14 @@
       	<%= t.label :title %>
       	<%= t.text_field :title %>
 
+        <%= t.label :timing %>
+        <%= t.text_field :timing %>
+
       	<%= t.label :description %>
       	<%= t.text_field :description %>
       	
       	<br/>
-      	<%= t.submit "Create Task", class: "btn btn-large btn-primary" %>
+      	<%= t.submit "Create", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
