@@ -4,15 +4,12 @@ class Task < ActiveRecord::Base
   	validates :title, presence: true, length: { maximum: 50 }
 
   	before_save :set_status_default
-  	
 
-	define_method "timing_before_type_cast" do
-        self.send("timing").to_s
-    end
 
   	private
 
   	def set_status_default
-    	self.status ||= false
+      write_attribute(:status, false)
+      true
   	end
 end
