@@ -1,35 +1,44 @@
 <% provide(:title,  'Tasks') %>
 
-<h1>Tasks List</h1>
-
-<div class="row">
-	<div class="span1">ID</div>
-    <div class="span2">Title</div>
-    <div class="span2">Timing</div>
-    <div class="span2">Status</div>
-    <div class="span4">Description</div>
-</div>
-
-<% @tasks.each do |task| %>
-<div class="row">
-    <div class="span1"><%= task.id %></div>
-    <div class="span2"><%= task.title %></div>
-    <div class="span2"><%= task.timing %></div>
-    <div class="span2">
-        <% if task.status %>
-            <%= "Completed" %>
-        <% else %>
-            <%= "Uncompleted" %>
-        <% end %>
-    </div>
-    <div class="span4">
-    	<% if task.description.empty? %>
-			<%= "No Description" %>
-		<% else %>
-			<%= task.description %>
-		<% end %>
-    </div>
-</div>
-<% end -%>
+<table class="table">
+  <caption><strong>Task List</strong></caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Due Date</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.title %></td>
+      <td><%= task.timing %></td>
+      <td>
+          <% if task.status %>
+              <%= "Completed" %>
+          <% else %>
+              <%= "Uncompleted" %>
+          <% end %>
+      </td>
+      <td>
+          <% if task.description.empty? %>
+              <%= "No Description" %>
+          <% else %>
+              <%= task.description %>
+          <% end %>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_task_path(task) %> | 
+        <%= link_to 'Delete', {:action=>'destroy', :id=>task.id}, :confirm=>"Are you sure", :method=>:delete %>
+      </td>
+    </tr>
+    <% end -%>
+  </tbody>
+</table>
 
 <%= link_to "Create Task", new_task_path, class: "btn btn-large btn-primary" %>
