@@ -19,8 +19,10 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
       
       if @task.update_attributes( params[:task] )
+        flash[:success] = "Task created."
         redirect_to action: 'index'
       else
+        flash[:success] = "Error while updating task, please retry."
         render 'edit'
       end
   	end
@@ -29,8 +31,8 @@ class TasksController < ApplicationController
       @task = Task.new(params[:task])
 	    
       if @task.save
-	    flash[:success] = "Task created."
-	    redirect_to @task
+	    flash[:success] = "Task created successfully."
+	    redirect_to action: "index"
 	  else
 	    redirect_to action: 'new'
 	  end
