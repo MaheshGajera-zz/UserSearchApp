@@ -9,11 +9,16 @@
       	<%= t.label :title %>
       	<%= t.text_field :title %>
 
-        <%= t.label :timing %>
+        <label for="task_timing">Due Date (YYYY Mon DD HH MM)</label>
         <div class="input-append span2 date-selects">
           <%= t.datetime_select :timing, class: "add-on" %>
         </div>
 
+        <div class="input-append span2 date-selects">
+        <%= t.label :priority %>
+      	<%= t.select :priority, get_priority_options %>
+        </div>
+        
       	<%= t.label :description %>
       	<%= t.text_field :description %>
       	

@@ -1,26 +1,44 @@
-<% provide(:title,  'Task') %>
+<% provide(:title,  @task.title) %>
 
-<h1><%= @task.title %></h1>
-
-<h2>Timing</h2>
-<p><%= @task.timing %></p>
-
-<h2>Status</h2>
-<p>
-	<% if @task.status %>
-        <%= "Completed" %>
-    <% else %>
-        <%= "Uncompleted" %>
-    <% end %>
-</p>
-
-<h2>Description</h2>
-<p>
-	<% if @task.description.empty? %>
-        <%= "No Description" %>
-    <% else %>
-        <%= @task.description %>
-    <% end %>
-</p>
+<table class="table">
+  <caption><strong>Task List</strong></caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Due Date</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @task.id %></td>
+      <td><%= @task.title %></td>
+      <td><%= @task.timing %></td>
+      <td><%= @task.priority %></td>
+      <td>
+          <% if @task.status %>
+              <%= "Completed" %>
+          <% else %>
+              <%= "Pending" %>
+          <% end %>
+      </td>
+      <td>
+          <% if @task.description.empty? %>
+              <%= "No Description" %>
+          <% else %>
+              <%= @task.description %>
+          <% end %>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_task_path(@task) %> | 
+        <%= link_to 'Delete', {:action=>'destroy', :id=>@task.id}, :confirm=>"Are you sure", :method=>:delete %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <%= link_to "List All Tasks", tasks_path %>

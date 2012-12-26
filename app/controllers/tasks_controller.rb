@@ -19,7 +19,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
       
       if @task.update_attributes( params[:task] )
-        redirect_to @task
+        redirect_to action: 'index'
       else
         render 'edit'
       end
@@ -32,15 +32,14 @@ class TasksController < ApplicationController
 	    flash[:success] = "Task created."
 	    redirect_to @task
 	  else
-	    render 'new'
+	    redirect_to action: 'new'
 	  end
   	end
   	
     def destroy
-      @task = Task.find(params[:id])
+      Task.find(params[:id]).destroy
       
-      @task.destroy
-      
-      redirect_to 'index'
+      flash[:success] = "Task deleted."
+      redirect_to action: "index"
   	end
 end
