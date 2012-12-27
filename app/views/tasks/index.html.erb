@@ -1,6 +1,12 @@
 <% provide(:title,  'Tasks') %>
 
-<div>
+<div class="pull-right title-search-form">
+  <form action="/tasks" class="form-search">
+    <input name="title" type="text" class="input-medium search-query">
+    <button type="submit" class="btn">Search</button>
+  </form>
+</div>
+<div class="task-list-main">
   <table class="table">
     <caption><strong>Task List</strong></caption>
     <thead>

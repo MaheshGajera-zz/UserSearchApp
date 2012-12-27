@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   	def index
-  		@tasks = Task.all
+        unless params[:title].nil? || params[:title].blank?
+          @tasks = Task.find(:all, :conditions => ['title LIKE ?', "%#{params[:title]}%"])
+        else
+          @tasks = Task.all
+  		end
   	end
 
   	def new

@@ -130,20 +130,6 @@ input {
   }
 }
 
-.date-selects {
-    float:none !important;
-    margin-left : 0 !important;
-    padding-bottom: 16px;
-    width : 92px;
-    select {
-        height : 40px !important;
-    }
-}
-
-#task_timing_4i{
-    
-}
-
 .field_with_errors {
   @extend .control-group;
   @extend .error;
