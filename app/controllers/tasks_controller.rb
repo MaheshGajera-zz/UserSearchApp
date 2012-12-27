@@ -33,8 +33,8 @@ class TasksController < ApplicationController
       if @task.save
 	    flash[:success] = "Task created successfully."
 	    redirect_to action: "index"
-	  else
-	    redirect_to action: 'new'
+      else
+	    render 'new'
 	  end
   	end
   	
