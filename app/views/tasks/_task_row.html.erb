@@ -1,0 +1,12 @@
+<tr>
+  <td><%= task.id %></td>
+  <td><%= task.title %></td>
+  <td><%= task.timing %></td>
+  <td><%= task.priority %></td>
+  <td><%= get_status_tag(task) %></td>
+  <td><%= get_description_tag(task.description) %></td>
+  <td>
+    <%= link_to "Edit", edit_task_path(task), :title => 'Delete this task' %> | 
+    <%= link_to 'Delete', { :action => 'destroy', :id => task.id }, :confirm=>"Are you sure", :method=>:delete, :title => 'Delete this task' %>
+  </td>
+</tr>

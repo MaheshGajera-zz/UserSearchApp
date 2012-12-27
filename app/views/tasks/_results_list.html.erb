@@ -1,0 +1,21 @@
+<div class="task-list-main">
+  <table class="table">
+    <caption><strong>Task List</strong></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th><%= link_to 'Due Date', {:action=>'index', :timing => 1}, :title => 'Sort by Due Date' %></th>
+        <th><%= link_to 'Priority', {:action=>'index', :priority => 1}, :title => 'Sort by Priority' %></th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% unless @tasks.nil? || @tasks.empty? %>
+        <%= render :partial => "task_row", :collection => @tasks, :as => :task %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
