@@ -10,8 +10,11 @@ class Task < ActiveRecord::Base
 
   	before_save :set_status_default
 
+    scope :matching_title, lambda { |title_to_match| where('title LIKE ?', "%#{title_to_match}%") }
+    scope :non_over_due, lambda { where("timing > ?", DateTime.now ) }
+  	scope :recent, order("timing")
 
-  	private
+    private
 
   	def set_status_default
       if self.status || self.status == 1 

@@ -2,17 +2,15 @@ class TasksController < ApplicationController
   	def index
         #-- Load As per Filters
         if ! params[:title].nil?
-          @tasks = Task.find(:all, :conditions => ['title LIKE ?', "%#{params[:title]}%"])
+          @tasks = Task.matching_title(params[:title])
         elsif ! params[:overdue].nil?
-          @tasks = Task.find(:all, :conditions => ['timing  > ?', DateTime.now ] )
+          @tasks = Task.non_over_due
         else
           @tasks = Task.all
         end
         
         #-- Apply Sorting If requested
-        if has_sorting?
-          @tasks = sort_results( @tasks )
-        end
+        @tasks = sort_results( @tasks )
   	end
 
   	def new
@@ -59,19 +57,9 @@ class TasksController < ApplicationController
     
     private
     
-    def has_sorting?
-      unless params[:priority].nil?
-        return true
-      end
-      unless params[:timing].nil?
-        return true
-      end
-      return false
-    end
-    
     def sort_results(tasks)
       unless params[:priority].nil?
-          priority_map = {
+        priority_map = {
           'High'   => 1,
           'Medium' => 2,
           'Low'    => 3,
