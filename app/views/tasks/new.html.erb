@@ -1,29 +1,6 @@
 <% provide(:title, 'New Task') %>
+
 <h1>Create a New Task</h1>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@task) do |t| %>
- 		<%= render 'shared/error_messages' %>
-      	
-      	<%= t.label :title %>
-      	<%= t.text_field :title %>
+<%= render :partial => "form", :locals => { :task => @task } %>
 
-        <label for="task_timing">Due Date (YYYY Mon DD HH MM)</label>
-        <div class="input-append span2 date-selects">
-          <%= t.datetime_select :timing, class: "add-on" %>
-        </div>
-
-        <div class="input-append span2 date-selects">
-        <%= t.label :priority %>
-      	<%= t.select :priority, get_priority_options %>
-        </div>
-        
-      	<%= t.label :description %>
-      	<%= t.text_field :description %>
-      	
-      	<br/>
-      	<%= t.submit "Create", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>

@@ -10,11 +10,11 @@ module TasksHelper
   def get_status_tag(task)
   	return "Over Due" if is_over_due(task.timing)
   	return "Completed" if task.status
-  	return "Pending"
+  	"Pending"
   end
 
   def get_description_tag(desc)
   	return "No Description" if desc.empty?
-  	return desc
+  	desc
   end
 end
