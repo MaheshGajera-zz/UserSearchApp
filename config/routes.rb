@@ -12,8 +12,8 @@ UserSearch::Application.routes.draw do
 
   resources :tasks
   
-  
-  get "users/new"
+  resources :users
+
   match '/signup',  to: 'users#new'
   
   # The priority is based upon order of creation:
