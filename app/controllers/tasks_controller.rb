@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+    before_filter :signed_in_user
+    before_filter :correct_user
+    
   	def index
         #-- Load As per Filters
         if ! params[:title].nil?
@@ -68,5 +71,17 @@ class TasksController < ApplicationController
       end
       
       return tasks
+    end
+    
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(tasks_path) unless current_user?(@user)
     end
 end
