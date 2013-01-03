@@ -13,8 +13,8 @@
       </tr>
     </thead>
     <tbody>
-      <% unless @tasks.nil? || @tasks.empty? %>
-        <%= render :partial => "task_row", :collection => @tasks, :as => :task %>
+      <% unless tasks.nil? || tasks.empty? %>
+        <%= render :partial => "tasks/task_row", :collection => tasks, :as => :task %>
       <% end %>
     </tbody>
   </table>

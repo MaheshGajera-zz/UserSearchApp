@@ -25,7 +25,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
       
       if @task.update_attributes( params[:task] )
-        flash[:success] = "Task created."
+        flash[:success] = "Task Updated."
         redirect_to action: 'index'
       else
         flash[:success] = "Error while updating task, please retry."

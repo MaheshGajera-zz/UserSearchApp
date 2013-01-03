@@ -1,10 +1,13 @@
 class Task < ActiveRecord::Base
   	attr_accessible :title, :description, :timing, :status, :priority
-
+    belongs_to :user
+    
   	validates :title, presence: true, length: { maximum: 50 }
 
     validates :timing, presence: true
-
+    
+    validates :user_id, presence: true
+    
     validates :priority, presence: true, :inclusion => { :in => %w(High Medium Low),
       :message => "%{value} is not a valid Priority" }
 
@@ -13,7 +16,9 @@ class Task < ActiveRecord::Base
     scope :matching_title, lambda { |title_to_match| where('title LIKE ?', "%#{title_to_match}%") }
     scope :non_over_due, lambda { where("timing > ?", DateTime.now ) }
   	scope :recent, order("timing")
-
+    
+    default_scope order: 'tasks.created_at DESC'
+    
     private
 
   	def set_status_default
