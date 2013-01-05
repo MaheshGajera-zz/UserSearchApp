@@ -3,19 +3,18 @@ class UsersController < ApplicationController
   before_filter :correct_user,   only: [:edit, :update]
   
   def index
-    @users = User.all
+    @users = current_user.organization.users
   end
   
   def new
     @user = User.new
   end
   
-  def show
-    @user = User.find(params[:id])
-  end
-  
   def create
+    org_id = params[:user][:organization_id]
+    params[:user].delete(:organization_id)
     @user = User.new(params[:user])
+    @user.organization = Organization.find(org_id)
     if @user.save
       flash[:success] = "Account has been created!"
       sign_in @user

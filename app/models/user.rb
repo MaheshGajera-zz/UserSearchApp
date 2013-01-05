@@ -1,11 +1,17 @@
 class User < ActiveRecord::Base
     attr_accessible :email, :name, :password, :password_confirmation
-    has_secure_password
-    has_many :tasks, dependent: :destroy
     
+    has_secure_password
+
+    belongs_to :organization
+    
+    has_many :tasks, dependent: :destroy
+
     before_save { |user| user.email = email.downcase }
     before_save :create_remember_token
     
+    validates :organization_id, presence: true
+
     validates :name,  presence: true, length: { maximum: 50 }
     
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

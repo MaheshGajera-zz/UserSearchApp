@@ -22,7 +22,5 @@ FactoryGirl.define do
   end
 end
 
-10.times do |n|
-	puts "creating organization recorn #{n}"
-	FactoryGirl.create(:organization)
-end
+puts "creating organization Records.."
+FactoryGirl.create_list(:organization, 10)
