@@ -10,12 +10,13 @@ UserSearch::Application.routes.draw do
   match '/help',   to: 'site_pages#help'
   match '/about',   to: 'site_pages#about'
 
-  resources :tasks
+  resources :tasks, only: [:index, :new, :create, :destroy, :edit, :update]
   
-  resources :users
+  resources :users, only: [:index, :create, :edit, :update]
+  
   match '/signup',  to: 'users#new'
     
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:create]
   
 
   match '/signin',  to: 'sessions#new'
