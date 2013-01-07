@@ -19,12 +19,19 @@ class User < ActiveRecord::Base
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
                       
-    validates :password, presence: true, length: { minimum: 6 }
-    validates :password_confirmation, presence: true
+    validates :password, presence: true, length: { minimum: 6 }, if: :password_required?
+    validates :password_confirmation, presence: true, if: :password_required?
     
     private
   
       def create_remember_token
         self.remember_token = SecureRandom.urlsafe_base64
+      end
+      
+      # Checks whether a password is needed or not. For validations only.
+      # Passwords are always required if it's a new record, or if the password
+      # or confirmation are being set somewhere.
+      def password_required?
+        !persisted? || !password.nil? || !password_confirmation.nil?
       end
 end
