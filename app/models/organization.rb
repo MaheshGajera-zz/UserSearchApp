@@ -2,6 +2,7 @@ class Organization < ActiveRecord::Base
   	attr_accessible :address1, :address2, :city, :country, :email, :name, :phone, :zip
   	
 	has_many :users, dependent: :destroy
+    has_many :invitation, dependent: :destroy
 
 	accepts_nested_attributes_for :users, :allow_destroy => true
 

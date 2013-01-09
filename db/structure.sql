@@ -1,3 +1,4 @@
+CREATE TABLE "invitations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sender_id" integer, "recipient_email" varchar(255), "token_character" varchar(255), "organization_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE TABLE "organizations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "email" varchar(255), "phone" varchar(255), "address1" varchar(255), "address2" varchar(255), "city" varchar(255), "zip" varchar(255), "country" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "tasks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "timing" datetime, "status" boolean, "priority" varchar(255), "user_id" integer);
@@ -25,3 +26,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130103110721');
 INSERT INTO schema_migrations (version) VALUES ('20130105073106');
 
 INSERT INTO schema_migrations (version) VALUES ('20130105151544');
+
+INSERT INTO schema_migrations (version) VALUES ('20130109121537');

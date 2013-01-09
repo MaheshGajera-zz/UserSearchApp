@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>Hi!</p>
+    <p>
+      <%= @invitation.user.name %> has invited you to join <%= @invitation.organization.name %> at Task Manager.
+    </p>
+    <p>
+      Join by clicking this link: </br>
+      <%= create_join_link(@invitation) %>.
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+    <p>Thanks</br>Task Manager Team.</p>
+  </body>
+</html>

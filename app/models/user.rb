@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
     has_secure_password
 
     belongs_to :organization
-    
     has_many :tasks, dependent: :destroy
+    has_many :invitation, dependent: :destroy
 
     before_save { |user| user.email = email.downcase }
     before_save :create_remember_token
@@ -24,14 +24,14 @@ class User < ActiveRecord::Base
     
     private
   
-      def create_remember_token
-        self.remember_token = SecureRandom.urlsafe_base64
-      end
-      
-      # Checks whether a password is needed or not. For validations only.
-      # Passwords are always required if it's a new record, or if the password
-      # or confirmation are being set somewhere.
-      def password_required?
-        !persisted? || !password.nil? || !password_confirmation.nil?
-      end
+        def create_remember_token
+          self.remember_token = SecureRandom.urlsafe_base64
+        end
+        
+        # Checks whether a password is needed or not. For validations only.
+        # Passwords are always required if it's a new record, or if the password
+        # or confirmation are being set somewhere.
+        def password_required?
+          !persisted? || !password.nil? || !password_confirmation.nil?
+        end
 end
