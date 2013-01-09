@@ -1,4 +1,4 @@
-class Invitation < ActionMailer::Base
+class InvitationMailer < ActionMailer::Base
     default from: "no-reply@taskmanager.com"
     
     def invitation_new_user( invitation )

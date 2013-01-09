@@ -10,7 +10,7 @@
     </p>
     <p>
       Join by clicking this link: </br>
-      <%= create_join_link(@invitation) %>.
+      <%= link_to "Join", "http://localhost:3000/invitations/accept/#{@invitation.token_character}" %>.
     </p>
     <p>Thanks for joining and have a great day!</p>
     <p>Thanks</br>Task Manager Team.</p>

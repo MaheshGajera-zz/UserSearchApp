@@ -22,7 +22,7 @@ UserSearch::Application.routes.draw do
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   
-  resources :invitation, only: [:new, :create]
+  resources :invitations, only: [:new, :create]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

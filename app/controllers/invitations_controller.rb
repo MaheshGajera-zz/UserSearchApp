@@ -1,13 +1,12 @@
-class InvitationController < ApplicationController
+class InvitationsController < ApplicationController
     before_filter :signed_in_user
-    
+    before_filter :validate_invited_user, only: [:create]
+
     def new
         @invitation = Invitation.new
     end
     
     def create
-        validate_invited_user
-        
         @invitation = Invitation.new( params[:invitation] )
         @invitation.user = current_user
         @invitation.organization = current_user.organization
@@ -15,7 +14,7 @@ class InvitationController < ApplicationController
         if @invitation.save
             flash[:success] = "Invitation Sent!"
 
-            Invitation.invitation_new_user(@invitation).deliver
+            InvitationMailer.invitation_new_user(@invitation).deliver
 
             redirect_to users_path
         else
@@ -39,6 +38,6 @@ class InvitationController < ApplicationController
             return if @user.nil?
 
             flash[:success] = "This user is already associated with #{@user.organization.name} organization"
-            redirect_to new_invitation_path
+            redirect_to new_invitation_url
         end
 end

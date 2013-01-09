@@ -1,0 +1,23 @@
+<% provide(:title, 'Invite') %>
+<h2>Invite New User</h2>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@invitation) do |f| %>
+
+		<% if ( ! @user.nil? ) && @user.errors.any? %>
+		  <div id="error_explanation">
+		    <ul>
+		    <% @invitation.errors.full_messages.each do |msg| %>
+		      <li>* <%= msg %></li>
+		    <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+	    <%= f.label :recipient_email %>
+	    <%= f.text_field :recipient_email %>
+
+	    <%= f.submit "Invite", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
