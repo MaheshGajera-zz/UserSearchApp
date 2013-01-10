@@ -8,12 +8,21 @@ class InvitationsController < ApplicationController
     
     def create
         @invitation = Invitation.new( params[:invitation] )
+        
+        #-- Give some identity to the invitation
         @invitation.user = current_user
         @invitation.organization = current_user.organization
 
         if @invitation.save
-            flash[:success] = "Invitation Sent!"
-            InvitationMailer.invitation_new_user(@invitation).deliver
+            #-- Give some identity to the invitation
+            begin
+                InvitationMailer.invitation_new_user(@invitation).deliver
+                flash[:success] = "Invitation Sent!"
+            rescue
+                @invitation.destroy
+                flash[:error] = "Error While sending the email, please try later!"
+                #-- TODO : To log detailed error desc...
+            end
             redirect_to users_path
         else
           render 'new'
@@ -32,8 +41,9 @@ class InvitationsController < ApplicationController
         begin
           @user = User.find(@invitation.recipient_email)
         rescue ActiveRecord::RecordNotFound
-          
-        end  
+           #-- TODO: Log Errors
+        end
+        
         unless @user.nil?
           redirect_to signin_url, notice: "Already a member!"
         end
