@@ -22,7 +22,7 @@ UserSearch::Application.configure do
     :port                 => 587,
     :domain               => 'baci.lindsaar.net',
     :user_name            => 'mahesh.gajera2012@gmail.com',
-    :password             => '********',
+    :password             => 'strongest',
     :authentication       => 'plain',
     :enable_starttls_auto => true  
   }

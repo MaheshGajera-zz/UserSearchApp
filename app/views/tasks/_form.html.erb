@@ -1,8 +1,8 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(task) do |t| %>
- 		<%= render 'shared/error_messages' %>
-      	
+ 		<%= render :partial => "shared/error_box", :locals => { :errors => task.nil? ? [] : task.errors } %>
+
       	<%= t.label :title %>
       	<%= t.text_field :title %>
 

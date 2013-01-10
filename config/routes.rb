@@ -24,6 +24,8 @@ UserSearch::Application.routes.draw do
   
   resources :invitations, only: [:new, :create]
   
+  match '/invitations/accept/:token_id',   to: 'invitations#accept'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

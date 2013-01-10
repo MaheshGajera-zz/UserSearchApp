@@ -5,15 +5,8 @@
   <div class="span6 offset3">
     <%= form_for(@invitation) do |f| %>
 
-		<% if ( ! @user.nil? ) && @user.errors.any? %>
-		  <div id="error_explanation">
-		    <ul>
-		    <% @invitation.errors.full_messages.each do |msg| %>
-		      <li>* <%= msg %></li>
-		    <% end %>
-		    </ul>
-		  </div>
-		<% end %>
+        <%= render :partial => "shared/error_box", :locals => { :errors => @invitation.nil? ? [] : @invitation.errors } %>
+        
 	    <%= f.label :recipient_email %>
 	    <%= f.text_field :recipient_email %>
 
