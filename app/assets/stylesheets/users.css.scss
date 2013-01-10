@@ -1,3 +1,14 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.org-selects {
+    float:none !important;
+    margin-left : 0 !important;
+    padding-bottom: 16px;
+    width : 459px;
+    select {
+        height : 40px !important;
+    }
+}

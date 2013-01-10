@@ -16,10 +16,11 @@
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
-
-      <%= f.label :organization_id %>
-      <%= f.collection_select :organization_id, Organization.all, :id, :name %>
-
+      <div class="input-append span2 org-selects">
+        <%= f.label :organization_id %>
+        <%= f.collection_select :organization_id, Organization.all, :id, :name %>
+      </div>
+      
       <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

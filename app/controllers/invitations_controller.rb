@@ -24,32 +24,31 @@ class InvitationsController < ApplicationController
                 #-- TODO : To log detailed error desc...
             end
             redirect_to users_path
-        else
-          render 'new'
+            return
         end
+        
+        render 'new'
     end
       
     def accept
         @invitation = Invitation.find_by_token_character( params[:token_id] )
+      
         if @invitation.nil?
-          redirect_to root_url, notice: "Invalid Token in request"
+          redirect_to root_path, notice: "Invalid Token in request."
+          return
         end
-        if signed_in?
-          sign_out
-        end
-        
-        begin
-          @user = User.find(@invitation.recipient_email)
-        rescue ActiveRecord::RecordNotFound
-           #-- TODO: Log Errors
-        end
-        
-        unless @user.nil?
-          redirect_to signin_url, notice: "Already a member!"
+        #-- Sign Out if signed in as any user
+        sign_out if signed_in?
+
+        user = User.find_by_email( @invitation.recipient_email )
+        unless user.nil?
+            redirect_to signin_url, notice: "Already a member!"
+            return
         end
         
-        @user = User.new(:email => @invitation.recipient_email )
-        @user.organization = @invitation.organization
+        user = User.new(:email => @invitation.recipient_email )
+        user.organization = @invitation.organization
+        
         render 'users/new'
     end
       
@@ -67,7 +66,7 @@ class InvitationsController < ApplicationController
             @user = User.find_by_email( params[:invitation][:recipient_email] )
             return if @user.nil?
 
-            flash[:success] = "This user is already associated with #{@user.organization.name} organization"
+            flash[:error] = "This user is already associated with #{@user.organization.name} organization"
             redirect_to new_invitation_url
         end
 end
