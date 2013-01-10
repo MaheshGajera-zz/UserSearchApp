@@ -21,8 +21,8 @@ UserSearch::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => 'baci.lindsaar.net',
-    :user_name            => 'mahesh.gajera2012@gmail.com',
-    :password             => 'strongest',
+    :user_name            => 'test-demo-app@gmail.com',
+    :password             => '******',
     :authentication       => 'plain',
     :enable_starttls_auto => true  
   }
