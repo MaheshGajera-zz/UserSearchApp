@@ -16,7 +16,16 @@ UserSearch::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
   # set delivery method to :smtp, :sendmail or :test
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'baci.lindsaar.net',
+    :user_name            => 'mahesh.gajera2012@gmail.com',
+    :password             => '********',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  
+  }
   
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
