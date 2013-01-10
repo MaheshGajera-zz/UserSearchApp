@@ -20,18 +20,19 @@ class UsersController < ApplicationController
         if @user.save
             flash[:success] = "Account has been created!"
             sign_in @user
-            
+
             #-- Lets Remove this users invitations
             begin
                 Invitation.find_by_recipient_email( @user.email ).destroy
             rescue
                 #-- TODO: Log Errors
             end
-            
+
             redirect_to tasks_path
-        else
-            render 'new'
+            return
         end
+        
+        render 'new'
     end
     
     def edit
@@ -44,9 +45,10 @@ class UsersController < ApplicationController
             flash[:success] = "Profile updated"
             sign_in @user
             redirect_to tasks_path
-        else
-            render 'edit'
+            return
         end
+        
+        render 'edit'
     end
   
   

@@ -29,10 +29,11 @@ class TasksController < ApplicationController
       if @task.update_attributes( params[:task] )
         flash[:success] = "Task Updated."
         redirect_to action: 'index'
-      else
-        flash[:success] = "Error while updating task, please retry."
-        render 'edit'
+        return
       end
+      
+      flash[:success] = "Error while updating task, please retry."
+      render 'edit'
   	end
     
   	def create
@@ -40,9 +41,10 @@ class TasksController < ApplicationController
       if @task.save
 	    flash[:success] = "Task created successfully."
 	    redirect_to action: "index"
-      else
-	    render 'new'
-	  end
+	    return
+      end
+	  
+	  render 'new'
   	end
   	
     def destroy
