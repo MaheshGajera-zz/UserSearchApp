@@ -40,14 +40,14 @@ class InvitationsController < ApplicationController
         #-- Sign Out if signed in as any user
         sign_out if signed_in?
 
-        user = User.find_by_email( @invitation.recipient_email )
+        @user = User.find_by_email( @invitation.recipient_email )
         unless user.nil?
             redirect_to signin_url, notice: "Already a member!"
             return
         end
         
-        user = User.new(:email => @invitation.recipient_email )
-        user.organization = @invitation.organization
+        @user = User.new(:email => @invitation.recipient_email )
+        @user.organization = @invitation.organization
         
         render 'users/new'
     end
